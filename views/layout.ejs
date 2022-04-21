@@ -1,0 +1,24 @@
+<html>
+    <head>
+
+        <title>
+            <%= title %>
+        </title>
+
+        <!-- //doubt -->
+        <link rel="stylesheet" href="\css\layout.css">
+        <%- style %>
+    </head>
+    <body>
+        
+        <%- include('_header'); %>
+
+        <!-- //body is predefined from library and contains the variable part -->
+        <%- body %>
+
+        <%- include('_footer'); %>
+        <%- script %>
+
+       
+    </body>
+</html>
