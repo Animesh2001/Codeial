@@ -1,24 +1,29 @@
 <html>
-    <head>
 
-        <title>
-            <%= title %>
-        </title>
+<head>
 
-        <!-- //doubt -->
-        <link rel="stylesheet" href="/css/layout.css">
-        <%- style %>
-    </head>
-    <body>
-        
-        <%- include('_header'); %>
+    <title>
+        <%= title %>
+    </title>
+
+
+    <link rel="stylesheet" href="/css/layout.css">
+    <%- style %>
+    
+</head>
+
+<body>
+
+    <%- include('_header'); %>
 
         <!-- //body is predefined from library and contains the variable part -->
         <%- body %>
 
-        <%- include('_footer'); %>
-        <%- script %>
+    <%- include('_footer'); %>
 
-       
-    </body>
+    <%- script %>
+
+
+</body>
+
 </html>
