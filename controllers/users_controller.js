@@ -75,3 +75,10 @@ module.exports.createSession=function(req,res){
     return res.redirect('/');
 }
 
+module.exports.destroySession = function(req,res){
+    //inbuilt function provided by passport to req for logout
+    req.logout();
+
+    return res.redirect('/');
+}
+
