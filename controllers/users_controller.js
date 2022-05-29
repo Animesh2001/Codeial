@@ -86,12 +86,15 @@ module.exports.create=function(req,res){
 
 //get the sign in data
 module.exports.createSession=function(req,res){
+    //anything you can write in place of succcess ==  abcdf :)
+    req.flash('success','Loggged in Successfully');
     return res.redirect('/');
 }
 
 module.exports.destroySession = function(req,res){
     //inbuilt function provided by passport to req for logout
     req.logout();
+    req.flash('success','You have logged out.!');
 
     return res.redirect('/');
 }
