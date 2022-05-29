@@ -14,6 +14,7 @@ module.exports.profile=function(req,res){
 module.exports.update=function(req,res){
     if(req.user.id==req.params.id){
         User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            req.flash('success','Profile Updated Successfully');
             return res.redirect('back');
         });
     }else{
@@ -33,6 +34,7 @@ module.exports.practice1=function(req,res){
 module.exports.signUp=function(req,res){
     //we checked if already signed in then don't show again the sign-up.. instead redirect to profile page
     if(req.isAuthenticated()){
+        req.flash('success','User already signed up');
         return res.redirect('/users/profile');
     }
 
@@ -46,6 +48,7 @@ module.exports.signUp=function(req,res){
 module.exports.signIn=function(req,res){
     //we checked if already signed in then don't show again the sign-in.. instead redirect to profile page
     if(req.isAuthenticated()){
+        req.flash('success','User already signed in');
         return res.redirect('/users/profile');
     }
 
@@ -60,24 +63,26 @@ module.exports.create=function(req,res){
     //first check if the password and confirm password mathces or not
     //if not matches then redirect back to same page
     if(req.body.password!=req.body.confirm_password){
+        req.flash('error','The password does not matched with confirm password');
         return res.redirect('back');
     }
 
 
     //check if email is already present
     User.findOne({email: req.body.email},function(err,user){
-        if(err){ console.log('error in finding user in signing up'); return;}
+        if(err){ req.flash('error',err);return res.redirect('back');}
 
             //when user is not found
             if(!user){
                 User.create(req.body,function(err,user){
-                    if(err){ console.log('error in creating user while signing up'); return;}
-
+                    if(err){ req.flash('error',err);return res.redirect('back');}
+                    req.flash('success','Signed Up succcessfully');
                     return res.redirect('/users/sign-in'); 
 
                 })
             }else{
-                return res.redirect('back');
+                req.flash('error','User already exist');
+                return res.redirect('/users/sign-in');
             }
     });
     

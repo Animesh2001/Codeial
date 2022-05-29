@@ -85,6 +85,9 @@ app.use(customMware.setFlash);
 //import from routes/index
 app.use('/',require('./routes/index'));
 
+// app.get('/test',function(req,res){
+//     console.log(req.query.testid)
+// })
 
 app.listen(port,function(err){
     if(err){

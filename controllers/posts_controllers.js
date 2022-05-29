@@ -8,10 +8,11 @@ module.exports.create= async function(req,res){
             //doubt
             user:req.user._id
         });
+        req.flash('success','Post published ');
         return res.redirect('back');
     }catch(err){
-        console.log('Error',err);
-        return;
+        req.flash('error',err);
+        return res.redirect('back');
     }
     
 }
@@ -24,13 +25,17 @@ module.exports.destroy= async function(req,res){
             post.remove();
         //we just done here err check as we don't want further the deleted comments in DB
           await  Comment.deleteMany({post:req.params.id});
+
+          req.flash('success','Post and associated Comments Deleted');
+
           return res.redirect('back');
         }else {
+            req.flash('error','You cannot delete this Post!');
             return res.redirect('back');
         }
     }catch(err){
-        console.log('Eror',err);
-        return;
+        req.flash('error',err);
+        return res.redirect('back');
     }
     
 }
